@@ -1,0 +1,49 @@
+{
+    "name": "bytenet/laravel-base",
+    "type": "library",
+    "description": "ByteNET Laravel Base package, which offers base authentication",
+    "keywords": [
+        "bytenet",
+        "laravel",
+        "dashboard",
+        "base"
+    ],
+    "homepage": "https://github.com/ByteNet-Serbia/laravel-base",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikola Zeravcic",
+            "email": "office@bytenet.rs",
+            "homepage": "http://www.bytenet.rs",
+            "role": "CEO, Chief Architect & Developer"
+        }
+    ],
+    "require": {
+        "illuminate/support": "~5.4",
+        "php" : ">5.5.0",
+        "almasaeed2010/AdminLTE": "^2.3",
+        "laravel/framework": "5.4.*",
+        "mcamara/laravel-localization": "^1.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ByteNet\\LaravelBase\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ByteNet\\LaravelBase\\Test\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
