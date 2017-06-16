@@ -1,0 +1,93 @@
+dist: trusty
+sudo: required
+#sudo: false
+
+language: php
+
+#versions
+php:
+#  - '5.4'
+#  - '5.5'
+#  - '5.6'
+#  - '7.0'
+  - '7.1'
+#  - hhvm
+#  - nightly
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm
+
+cache:
+  directories:
+    - laravel
+
+services: mysql
+
+#mysql:
+#  database: bytenet2_test_db
+#  username: root
+#  encoding: utf8mb4
+
+#install:
+  # create a new database for the hyn connection
+  #- export DB_USERNAME=travis DB_DATABASE=hyn DB_PASSWORD= QUEUE_DRIVER=sync
+  # specify the laravel service providers to insert
+  #- export PACKAGE_PROVIDER="
+  #  ByteNet\\LaravelAdminBase\\AdminsServiceProvider::class"
+  #specify the seed class to seed the data
+  #- export SEED_CLASS=TestSeeds::class
+  #specify the package to test
+  #- export PACKAGE_NAME=bytenet/laravel-admin-base
+  #run the setup script
+  #- curl -s https://raw.githubusercontent.com/kevupton/docker-laravel-tests/master/setup.sh | bash
+
+before_install:
+#  - mysql --version
+#  - mysql -u root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('')"
+  - mysql -e "create database IF NOT EXISTS test;" -uroot
+
+#before_script:
+#  - cp .env.travis .env
+#  - cp ./tests/database.php ./database.php
+#  - mysql -e 'create database bytenet2_test_db;'
+#  - composer self-update
+#  - composer install --no-interaction
+
+before_script:
+  - export GITHUB_NAME=ByteNet-Serbia
+  - export GITHUB_PACKAGE=laravel-base
+  - export COMPOSER_NAME=bytenet
+  - export COMPOSER_PACKAGE=$GITHUB_PACKAGE
+  - composer self-update
+  #- composer create-project laravel/laravel
+  - composer create-project --prefer-dist laravel/laravel laravel
+  - cd ./laravel
+  - composer config repositories.$COMPOSER_NAME vcs https://github.com/$GITHUB_NAME/$GITHUB_PACKAGE.git
+  - composer require $COMPOSER_NAME/$GITHUB_PACKAGE dev-master
+  - composer update
+  - rm ./.env
+  - cp ./vendor/$COMPOSER_NAME/$GITHUB_PACKAGE/tests/.env ./.env # set specific testing values
+  - rm ./config/app.php
+  - cp ./vendor/$COMPOSER_NAME/$GITHUB_PACKAGE/tests/app.php ./config # set Package Service Provider(s)
+  - rm ./app/Providers/AppServiceProvider.php
+  - cp ./vendor/$COMPOSER_NAME/$GITHUB_PACKAGE/tests/AppServiceProvider.php ./app/Providers/ # set solution for MySQL < 5.7.7 (https://laravel-news.com/laravel-5-4-key-too-long-error)
+  - php artisan vendor:publish
+  #- php artisan migrate --seed #setups the migrations and seeding
+  - php artisan migrate
+
+
+#script: phpunit tests/*
+script:
+  #script to setup the package for testing
+  - ./vendor/bin/phpunit "./vendor/${COMPOSER_NAME}/$GITHUB_PACKAGE" #runs the phpunit just for your package
+
+after_script:
+  - php -r 'echo __DIR__ . "\n";print_r(scandir(__DIR__));'
+  - php -r 'echo file_get_contents("./.env");'
+  - php -r 'echo file_get_contents("./config/app.php");'
+  - php -r 'print_r(scandir(__DIR__ . "/vendor"));'
+
+notifications:
+  email: false
