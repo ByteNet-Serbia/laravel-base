@@ -1,0 +1,15 @@
+// Bootstrap
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+//@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css);
+
+
+// Import
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css);
+
+@import "node_modules/admin-lte/dist/css/AdminLTE.min";
+@import "node_modules/admin-lte/dist/css/skins/_all-skins.min";
+
+// ...or import locally (from vendor)
+//@import "./../../../../../public/vendor/adminlte/dist/css/AdminLTE.min";
+//@import "./../../../../../public/vendor/adminlte/dist/css/skins/_all-skins.min";
