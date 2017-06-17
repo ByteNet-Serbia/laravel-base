@@ -47,8 +47,6 @@ class BaseServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/resources/lang' => resource_path('lang/vendor/bytenet-base')], 'lang');
         // publish assets files
         $this->publishes([__DIR__.'/resources/assets' => resource_path('assets/vendor/bytenet-base')], 'assets');
-        // publish database seeds
-        $this->publishes([__DIR__ . '/database/seeds' => database_path('seeds')], 'seeds');
         // publish views
         $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/bytenet/laravel-base')], 'views');
         // publish error views
@@ -57,19 +55,6 @@ class BaseServiceProvider extends ServiceProvider
         //$this->publishes([__DIR__.'/public' => public_path('vendor/bytenet')], 'public');
         // publish public AdminLTE assets
         //$this->publishes([base_path('vendor/almasaeed2010/adminlte') => public_path('vendor/adminlte')], 'adminlte');
-
-        Passport::tokensCan([
-            'show-users' => 'Show all users',
-            'show-user' => 'Show user',
-            'add-user' => 'Add user',
-            'upadate-user' => 'Update user',
-            'delete-user' => 'Delete user',
-            'show-posts' => 'Show all posts',
-            'show-post' => 'Show post',
-            'add-post' => 'Add post',
-            'upadate-post' => 'Update post',
-            'delete-post' => 'Delete post',
-        ]);
     }
 
     /**
