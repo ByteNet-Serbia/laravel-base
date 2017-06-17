@@ -4,7 +4,7 @@ All Notable changes to `bytenet\laravel-base` project will be documented in this
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [0.1.0] - 2017-06-17
 ### Added
 - src/app/Http/Controllers/Auth/ForgotPasswordController.php
 - src/app/Http/Controllers/Auth/LoginController.php
@@ -68,4 +68,4 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - src/app/Http/Http/Controllers/BaseController.php
 - tests/ByteNet/LaravelBase/BaseTest.php
 
-[Unreleased]: https://github.com/ByteNet-Serbia/laravel-base/compare/v0.0.1...HEAD
+[0.1.0]: https://github.com/ByteNet-Serbia/laravel-base/compare/v0.0.1...v0.1.0
